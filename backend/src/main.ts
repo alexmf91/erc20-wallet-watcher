@@ -15,10 +15,11 @@ async function bootstrap() {
       app.get<ConfigService<EnvironmentVariables>>(ConfigService);
 
     const PORT = configService.get('PORT', { infer: true }) || 3000;
+    const VERSION = configService.get('VERSION', { infer: true });
 
     const { httpAdapter } = app.get(HttpAdapterHost);
 
-    app.setGlobalPrefix('api');
+    app.setGlobalPrefix(`api/v${VERSION}`);
     app.enableCors();
     app.useGlobalPipes(new ValidationPipe({ transform: true }));
     app.useGlobalFilters(new HttpExceptionFilter(httpAdapter));
