@@ -1,5 +1,6 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { RouterModule } from '@nestjs/core';
 
 import { LoggerMiddleware } from './common/middleware';
 import { ChainlinkModule } from './modules/coins';
@@ -14,6 +15,17 @@ import { AppService } from './app.service';
       isGlobal: true,
     }),
     ChainlinkModule,
+    RouterModule.register([
+      {
+        path: 'coins',
+        children: [
+          {
+            path: 'chainlink',
+            module: ChainlinkModule,
+          },
+        ],
+      },
+    ]),
   ],
   controllers: [AppController],
   providers: [AppService],
