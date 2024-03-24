@@ -1,10 +1,4 @@
-import {
-  Controller,
-  Get,
-  Param,
-  UsePipes,
-  ValidationPipe,
-} from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ChainlinkService } from './chainlink.service';
 import {
@@ -37,7 +31,6 @@ export class ChainlinkController {
     type: 'string',
     example: '0x5a821936C1a5606d9Bd870507B52B69964f7318b',
   })
-  @UsePipes(new ValidationPipe({ transform: true }))
   async getBalance(@Param() params: GetBalanceParamDto) {
     const [balance, priceDetails] = await Promise.all([
       this.chainlinkService.getBalance(params.address),
