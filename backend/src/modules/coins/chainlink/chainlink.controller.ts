@@ -16,7 +16,7 @@ import {
 } from './dto';
 
 @ApiTags('Coins')
-@Controller('chainlink')
+@Controller()
 export class ChainlinkController {
   constructor(private readonly chainlinkService: ChainlinkService) {}
 
