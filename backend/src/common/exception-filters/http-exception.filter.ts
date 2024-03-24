@@ -1,15 +1,25 @@
 import {
-  ExceptionFilter,
-  Catch,
   ArgumentsHost,
+  Catch,
+  ExceptionFilter,
   HttpException,
   HttpStatus,
+  Logger,
 } from '@nestjs/common';
 import { AbstractHttpAdapter } from '@nestjs/core';
 
+import {
+  getExceptionError,
+  getExceptionErrorMessage,
+} from './http-exception.utils';
+
 @Catch()
 export class HttpExceptionFilter implements ExceptionFilter {
-  constructor(private readonly httpAdapterHost: AbstractHttpAdapter) {}
+  private readonly logger: Logger;
+
+  constructor(private readonly httpAdapterHost: AbstractHttpAdapter) {
+    this.logger = new Logger(HttpExceptionFilter.name);
+  }
 
   catch(exception: HttpException | any, host: ArgumentsHost): void {
     const httpAdapter = this.httpAdapterHost;
@@ -21,18 +31,20 @@ export class HttpExceptionFilter implements ExceptionFilter {
         ? exception.getStatus()
         : HttpStatus.INTERNAL_SERVER_ERROR;
 
-    const errorMessage =
-      exception.response.message?.length > 1
-        ? exception.response.message
-        : exception.response.message[0];
+    const errorMessage = getExceptionErrorMessage(exception);
 
     const responseBody = {
       path: httpAdapter.getRequestUrl(ctx.getRequest()),
       statusCode: httpStatus,
-      error: exception.response.error,
+      error: getExceptionError(exception),
       message: errorMessage,
       timestamp: new Date().toISOString(),
     };
+
+    this.logger.error(
+      `HTTP Status: ${httpStatus}, Error Message: ${errorMessage}`,
+      exception.stack,
+    );
 
     httpAdapter.reply(ctx.getResponse(), responseBody, httpStatus);
   }
