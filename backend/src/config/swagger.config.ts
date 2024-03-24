@@ -31,5 +31,5 @@ export function setupSwagger(
     },
   };
 
-  SwaggerModule.setup('api', app, document, customOptions);
+  SwaggerModule.setup('api-docs', app, document, customOptions);
 }
