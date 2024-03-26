@@ -4,9 +4,10 @@ import { twMerge } from 'tailwind-merge'
 
 type Props = {
   className?: string
+  children?: React.ReactNode
 }
 
-export default function ConnectWalletButton({ className }: Props) {
+export default function ConnectWalletButton({ className, children }: Props) {
   return (
     <ConnectKitButton.Custom>
       {({ isConnected, show, address }) => {
@@ -18,7 +19,7 @@ export default function ConnectWalletButton({ className }: Props) {
               className
             )}
           >
-            {isConnected ? formatAddress(address) : 'Connect Wallet'}
+            {isConnected ? formatAddress(address) : children || 'Connect Wallet'}
           </button>
         )
       }}
