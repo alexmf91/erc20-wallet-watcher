@@ -1,6 +1,6 @@
 import { formatAddress } from '@/utils'
 import { ConnectKitButton } from 'connectkit'
-import { twMerge } from 'tailwind-merge'
+import Button from './Button'
 
 type Props = {
   className?: string
@@ -12,15 +12,9 @@ export default function ConnectWalletButton({ className, children }: Props) {
     <ConnectKitButton.Custom>
       {({ isConnected, show, address }) => {
         return (
-          <button
-            onClick={show}
-            className={twMerge(
-              'text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-full text-sm px-5 py-2.5 text-center',
-              className
-            )}
-          >
+          <Button onClick={show} className={className}>
             {isConnected ? formatAddress(address) : children || 'Connect Wallet'}
-          </button>
+          </Button>
         )
       }}
     </ConnectKitButton.Custom>
