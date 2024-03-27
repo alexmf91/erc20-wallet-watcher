@@ -38,7 +38,7 @@ export default function Dashboard() {
           ))}
         </ul>
 
-        <p className="font-extrabold text-transparent text-6xl bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-600 p-14 text-center mx-auto">
+        <p className="font-extrabold text-transparent text-6xl bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-600 py-14 text-center mx-auto">
           More tokens
           <br /> coming soon!
         </p>
