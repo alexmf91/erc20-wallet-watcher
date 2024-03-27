@@ -8,7 +8,7 @@ export default function AppLayout({ children }: Props) {
   return (
     <>
       <Header />
-      <main className="mx-auto min-h-[80vh] px-5 py-20 lg:py-40">{children}</main>
+      <main className="mx-auto min-h-[80vh] px-5">{children}</main>
       <Footer />
     </>
   )
