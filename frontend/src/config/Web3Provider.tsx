@@ -11,7 +11,9 @@ const config = createConfig(
       [sepolia.id]: http(import.meta.env.VITE_RPC_PROVIDER_URL)
     },
     appName: 'Erc20 Wallet Watcher',
-    appDescription: 'Track your ERC20 tokens with ease.'
+    appDescription: 'Track your ERC20 tokens with ease.',
+    appUrl: 'https://erc20-wallet-watcher.vercel.app',
+    appIcon: 'https://erc20-wallet-watcher.vercel.app/ethereum-logo.svg'
   })
 )
 
