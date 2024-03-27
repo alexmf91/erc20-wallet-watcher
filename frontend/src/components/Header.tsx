@@ -1,4 +1,4 @@
-import { ConnectWalletButton } from './ui'
+import { ConnectWalletButton } from './ui/buttons'
 
 export default function Header() {
   return (
