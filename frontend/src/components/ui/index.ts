@@ -1,1 +1,1 @@
-export { default as ConnectWalletButton } from './ConnectWalletButton'
+export { default as Modal } from './Modal'
